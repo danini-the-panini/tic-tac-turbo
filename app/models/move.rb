@@ -27,6 +27,20 @@ class Move < ApplicationRecord
     false
   end
 
+  def position
+    [
+      'top left',
+      'top middle',
+      'top right',
+      'middle left',
+      'dead center',
+      'middle right',
+      'bottom left',
+      'bottom middle',
+      'bottom right'
+    ][index]
+  end
+
   private
 
     def player_in_game

@@ -1,1 +1,116 @@
-// Entry point for your Sass build
+$background-color: #66DAFF;
+$border-color: #AAEAFF;
+$text-color: #123B48;
+$hilight-color: #86E2FF;
+$hilight-text-color: #D5F5FF;
+
+$x-color: #E55C31;
+$o-color: #1BA048;
+
+$border-width: 0.25rem; // 4px
+$border-radius: 1rem; // 16px
+$border-radius-big: 1.5rem; // 24px
+
+$font-size-default: 1rem; // 16px
+$font-size-big: 1.5rem; // 24px
+$font-size-fat: 3rem; // 48px
+
+$space-small: 0.25rem; // 4px
+$space-default: 0.5rem; // 8px
+$space-big: 1rem; // 16px
+$space-fat: 1.5rem; // 24px
+
+@mixin bordered($width: $border-width, $style: solid, $color: $border-color, $radius: $border-radius) {
+  border: $width $style $color;
+  border-radius: $radius;
+}
+
+html {
+  font-size: 100%;
+  font-family: system-ui,
+              -apple-system,
+              'Segoe UI',
+              Roboto,
+              Helvetica,
+              Arial,
+              sans-serif,
+              'Apple Color Emoji',
+              'Segoe UI Emoji';
+  box-sizing: border-box;
+  background-color: $background-color;
+  color: $text-color;
+  height: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  min-height: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+input, button {
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-weight: 900;
+  padding: $space-big;
+}
+
+button {
+  font-family: inherit;
+  color: $hilight-text-color;
+  text-transform: uppercase;
+
+  &:not(:disabled):hover {
+    background-color: $hilight-color;
+    cursor: pointer;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-style: italic;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  margin: $space-big 0 $space-default;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: $space-default;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100rem;
+  background-color: $border-color;
+}
+
+img {
+  display: block;
+}
+
+@import "./new-player.scss";
+@import "./layout.scss";
+@import "./games.scss";
+@import "./game.scss";

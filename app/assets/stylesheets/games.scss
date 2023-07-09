@@ -1,0 +1,70 @@
+main.games {
+  padding: $space-default;
+
+  ul {
+    @include bordered($radius: $border-radius-big);
+    min-height: 4rem;
+    padding: $space-big;
+    display: flex;
+    flex-direction: column;
+    gap: $space-big;
+
+    li {
+      @include bordered;
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      a, button {
+        height: 100%;
+      }
+
+      .game-link {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        justify-items: center;
+        align-items: center;
+        border-top-left-radius: $border-radius - $border-width;
+        border-bottom-left-radius: $border-radius - $border-width;
+        padding: $space-default;
+
+        &:hover {
+          background-color: $hilight-color;
+        }
+
+        &:last-child {
+          border-top-right-radius: $border-radius - $border-width;
+          border-bottom-right-radius: $border-radius - $border-width;
+        }
+      }
+
+      .players {
+        display: flex;
+        flex-direction: column;
+        gap: $space-default;
+      }
+
+      .join-button {
+        border-left: $border-width solid $border-color;
+        border-top-right-radius: $border-radius - $border-width;
+        border-bottom-right-radius: $border-radius - $border-width;
+      }
+
+      &.new-game {
+        button {
+          width: 100%;
+          border-radius: $border-radius - $border-width;
+        }
+      }
+    }
+
+    &:not(:has(*))::before {
+      @include bordered($style: dashed);
+      content: 'No games';
+      font-style: italic;
+      font-weight: 900;
+      text-align: center;
+      padding: $space-big;
+      color: $border-color;
+    }
+  }
+}

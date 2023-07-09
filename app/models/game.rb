@@ -36,6 +36,11 @@ class Game < ApplicationRecord
     nil
   end
 
+  def player_value(player)
+    return :x if player == player_x
+    return :o if player == player_o
+  end
+
   def end_turn!
     return x_wins! if board.winner?(:x)
     return o_wins! if board.winner?(:o)

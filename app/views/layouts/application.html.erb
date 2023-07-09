@@ -19,10 +19,15 @@
     <% end %>
 
     <% if current_player %>
-      <nav>
-        <%= link_to 'Games', games_path %>
-        <p>Hello, <%= current_player.name %></p>
-      </nav>
+      <header>
+        <%= link_to_unless_current 'Games', games_path do %>
+          <strong>Games</strong>
+        <% end %>
+        <h1>Tic-Tac-Turbo</h1>
+        <%= link_to new_player_path, class: "player-link" do %>
+          👤 <span><%= current_player.name %></span>
+        <% end %>
+      </header>
     <% end %>
 
     <%= yield %>

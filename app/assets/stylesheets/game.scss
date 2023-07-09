@@ -1,0 +1,122 @@
+main.game {
+  padding: $space-default;
+
+  .players-panel {
+    @include bordered($radius: $border-radius-big);
+    padding: $space-big;
+
+    .players {
+      display: flex;
+      justify-content: space-between;
+
+      :last-child {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .join-button {
+      @include bordered;
+      border-radius: $border-radius - $border-width;
+      width: 100%;
+      margin-top: $space-big;
+    }
+  }
+
+  .board {
+    @include bordered($radius: $border-radius-big);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: $space-default;
+    padding: $space-default;
+
+    > * {
+      aspect-ratio: 1;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    button {
+      @include bordered;
+      width: 100%;
+      height: 100%;
+
+      &:disabled {
+        border-style: dashed;
+      }
+
+      &:not(:disabled):hover {
+
+        &::before {
+          content: '';
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 100%;
+          height: 100%;
+          opacity: 30%;
+        }
+
+        &.x::before {
+          background-image: url('x.svg');
+        }
+  
+        &.o::before {
+          background-image: url('o.svg');
+        }
+      }
+    }
+
+    button, .value {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: normal;
+      text-transform: uppercase;
+      padding: 20%;
+    }
+
+    .value {
+      @include bordered($color: transparent);
+    }
+  }
+
+  .moves {
+    @include bordered;
+    margin-top: $space-big;
+    padding: $space-big;
+    display: flex;
+    flex-direction: column;
+    gap: $space-default;
+
+    li {
+      display: flex;
+      gap: $space-default;
+    }
+  }
+
+  &.draw .x, &.draw .o, &.x_wins .o, &.o_wins .x {
+    filter: blur(4px);
+  }
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: $space-default;
+
+  &.you {
+    font-weight: 700;
+  }
+
+  &.turn {
+    text-decoration: underline;
+  }
+
+  img {
+    width: 1rem;
+    height: auto;
+  }
+}

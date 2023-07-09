@@ -1,13 +1,14 @@
 class PlayersController < ApplicationController
   def new
-    @player = Player.new
+    @player = Player.new(name: current_player&.name)
+    sign_out
   end
 
   def create
     @player = Player.find_or_initialize_by(permitted_params)
 
     if @player.save
-      session[:player_id] = @player.id
+      sign_in @player
       redirect_to games_path, notice: "Welcome, #{@player.name}"
     else
       render :new, alert: "Oops, try again"

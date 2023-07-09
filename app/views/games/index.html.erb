@@ -1,22 +1,22 @@
-<h1>Games</h1>
-<%= button_to 'New Game', Game.new %>
+<main class="games">
+  <h2>Your games</h2>
+  <ul class="game-list">
+    <%= render @yours %>
+  </ul>
 
-<h2>Yours</h2>
-<ul>
-  <%= render @yours %>
-</ul>
+  <h2>Waiting for players</h2>
+  <ul class="game-list">
+    <%= render @joinable %>
+    <li class="new-game"><%= button_to 'New Game', Game.new %></li>
+  </ul>
 
-<h2>Joinable</h2>
-<ul>
-  <%= render @joinable %>
-</ul>
+  <h2>Other games</h2>
+  <ul class="game-list">
+    <%= render @other %>
+  </ul>
 
-<h2>Other</h2>
-<ul>
-  <%= render @other %>
-</ul>
-
-<h2>Ended</h2>
-<ul>
-  <%= render @ended %>
-</ul>
+  <h2>Ended</h2>
+  <ul class="game-list">
+    <%= render @ended %>
+  </ul>
+</main>

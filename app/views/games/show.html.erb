@@ -1,31 +1,38 @@
-<h1>Game #<%= @game.id %></h1>
+<main class="game <%= @game.status %>">
+  <div class="players-panel">
+    <div class="players">
+      <%= render 'players', game: @game %>
+    </div>
 
-<p>Game #<%= @game.id %></p>
-<p>Player X: <%= @game.player_x&.name || '...' %></p>
-<p>Player O: <%= @game.player_o&.name || '...' %></p>
-<p>Status: <%= @game.status %></p>
-<p>Created: <%= @game.created_at %></p>
-<p>Updated: <%= @game.updated_at %></p>
+    <% if @game.joinable_by?(current_player) %>
+      <%= button_to 'Join!', join_game_path(@game), class: "join-button" %>
+    <% end %>
+  </div>
 
-<% if @game.joinable_by?(current_player) %>
-  <%= button_to 'Join!', join_game_path(@game) %>
-<% end %>
+  <h2><%= @game.status%></h2>
 
-<table>
-  <% @game.board.rows_with_index.each do |row| %>
-    <tr>
+  <div class="board">
+    <% @game.board.rows_with_index.each do |row| %>
       <% row.each do |value, index| %>
-        <td>
-          <% if value %>
-            <%= value %>
-          <% elsif @game.in_progress? %>
-            <%= form_with model: [@game, @game.moves.new(player: current_player, index:)] do |f| %>
-              <%= f.hidden_field :index %>
-              <%= f.submit ' ', disabled: current_player != @game.turn_player %>
-            <% end %>
+        <% if value %>
+          <div class="value <%= value %>"><%= image_tag "#{value}.svg" %></div>
+        <% elsif @game.ended? %>
+          <div></div>
+        <% else %>
+          <%= form_with model: [@game, @game.moves.new(player: current_player, index:)] do |f| %>
+            <%= f.hidden_field :index %>
+            <%= f.button '', disabled: current_player != @game.turn_player, class: @game.player_value(current_player) %>
           <% end %>
-        </td>
+        <% end %>
       <% end %>
-    </tr>
+    <% end %>
+  </div>
+
+  <% unless @game.waiting? %>
+    <ul class="moves">
+      <% @game.moves.order(created_at: :asc).each do |move| %>
+        <li><%= image_tag "#{move.value}.svg" %> <%= move.position %></li>
+      <% end %>
+    </ul>
   <% end %>
-</table>
+</main>

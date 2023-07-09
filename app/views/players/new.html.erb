@@ -1,8 +1,9 @@
-<%= form_with model: @player do |f| %>
+<main class="new-player">
+  <h1>Tic-Tac-Turbo</h1>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_with model: @player do |f| %>
+    <%= f.text_field :name, placeholder: 'Name', autofocus: true %>
 
-  <%= f.submit %>
-
-<% end %>
+    <%= f.button 'Play' %>
+  <% end %>
+</main>

@@ -1,0 +1,14 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-default;
+
+  h1 {
+    font-size: $font-size-default;
+  }
+
+  a:not(.player-link), a.player-link span {
+    text-decoration: underline;
+  }
+}

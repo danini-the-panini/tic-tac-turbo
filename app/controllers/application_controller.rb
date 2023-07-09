@@ -8,6 +8,16 @@ class ApplicationController < ActionController::Base
     @current_player = Player.find_by(id: session[:player_id])
   end
 
+  def sign_in(player)
+    @current_player = player
+    session[:player_id] = player.id
+  end
+
+  def sign_out
+    @current_player = nil
+    session[:player_id] = nil
+  end
+
   private
 
     def authenticate_player
