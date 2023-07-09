@@ -3,7 +3,10 @@ class GamesController < ApplicationController
   before_action :authenticate_player
 
   def index
-    @games = Game.all.order(created_at: :asc)
+    @yours    = current_player.games.not_ended.order(updated_at: :desc)
+    @joinable = Game.joinable_by(current_player).order(created_at: :asc)
+    @other    = Game.other_in_progress(current_player).order(created_at: :asc)
+    @ended    = Game.ended.order(updated_at: :desc)
   end
 
   def show

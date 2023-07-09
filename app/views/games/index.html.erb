@@ -1,19 +1,22 @@
+<h1>Games</h1>
 <%= button_to 'New Game', Game.new %>
 
+<h2>Yours</h2>
 <ul>
-  <% @games.each do |game| %>
+  <%= render @yours %>
+</ul>
 
-    <li>
-      <p><%= link_to "Game ##{game.id}", game %></p>
-      <p>Player X: <%= game.player_x&.name || 'waiting...' %></p>
-      <p>Player O: <%= game.player_o&.name || 'waiting...' %></p>
-      <p>Status: <%= game.status %></p>
-      <p>Created: <%= game.created_at %></p>
-      <p>Updated: <%= game.updated_at %></p>
-      <% if game.joinable_by?(current_player) %>
-        <%= button_to 'Join!', join_game_path(game) %>
-      <% end %>
-    </li>
+<h2>Joinable</h2>
+<ul>
+  <%= render @joinable %>
+</ul>
 
-  <% end %>
+<h2>Other</h2>
+<ul>
+  <%= render @other %>
+</ul>
+
+<h2>Ended</h2>
+<ul>
+  <%= render @ended %>
 </ul>

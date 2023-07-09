@@ -1,11 +1,15 @@
 <h1>Game #<%= @game.id %></h1>
 
 <p>Game #<%= @game.id %></p>
-<p>Player X: <%= @game.player_x&.name || 'waiting...' %></p>
-<p>Player O: <%= @game.player_o&.name || 'waiting...' %></p>
+<p>Player X: <%= @game.player_x&.name || '...' %></p>
+<p>Player O: <%= @game.player_o&.name || '...' %></p>
 <p>Status: <%= @game.status %></p>
 <p>Created: <%= @game.created_at %></p>
 <p>Updated: <%= @game.updated_at %></p>
+
+<% if @game.joinable_by?(current_player) %>
+  <%= button_to 'Join!', join_game_path(@game) %>
+<% end %>
 
 <table>
   <% @game.board.rows_with_index.each do |row| %>
@@ -14,7 +18,7 @@
         <td>
           <% if value %>
             <%= value %>
-          <% else %>
+          <% elsif @game.in_progress? %>
             <%= form_with model: [@game, @game.moves.new(player: current_player, index:)] do |f| %>
               <%= f.hidden_field :index %>
               <%= f.submit ' ', disabled: current_player != @game.turn_player %>

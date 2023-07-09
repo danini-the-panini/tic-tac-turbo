@@ -1,0 +1,11 @@
+<li>
+  <p><%= link_to "Game ##{game.id}", game %></p>
+  <p>Player X: <%= game.player_x&.name || '...' %></p>
+  <p>Player O: <%= game.player_o&.name || '...' %></p>
+  <p>Status: <%= game.status %></p>
+  <p>Created: <%= game.created_at %></p>
+  <p>Updated: <%= game.updated_at %></p>
+  <% if game.joinable_by?(current_player) %>
+    <%= button_to 'Join!', join_game_path(game) %>
+  <% end %>
+</li>

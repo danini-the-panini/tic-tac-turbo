@@ -14,6 +14,14 @@ class Game < ApplicationRecord
     draw
   ]
 
+  scope :in_progress, -> { where(status: %i[x_turn o_turn]) }
+  scope :ended,       -> { where(status: %i[x_wins o_wins draw]) }
+  scope :not_ended,   -> { where(status: %i[waiting x_turn o_turn]) }
+
+  scope :other_in_progress, -> (player) {
+    in_progress.where.not(player_x: player).where.not(player_o: player)
+  }
+
   scope :joinable_by, -> (player) {
     waiting.merge(
       Game.where.not(player_x: player).where.not(player_x: nil)
