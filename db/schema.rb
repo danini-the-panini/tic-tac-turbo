@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_09_135832) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_09_154157) do
   create_table "games", force: :cascade do |t|
     t.integer "player_o_id"
     t.integer "player_x_id"
-    t.string "board", default: "         ", null: false
+    t.string "board_data", default: "         ", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_o_id"], name: "index_games_on_player_o_id"
     t.index ["player_x_id"], name: "index_games_on_player_x_id"
+  end
+
+  create_table "moves", force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "player_id", null: false
+    t.integer "index", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_moves_on_game_id"
+    t.index ["player_id"], name: "index_moves_on_player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -30,4 +40,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_09_135832) do
 
   add_foreign_key "games", "players", column: "player_o_id"
   add_foreign_key "games", "players", column: "player_x_id"
+  add_foreign_key "moves", "games"
+  add_foreign_key "moves", "players"
 end

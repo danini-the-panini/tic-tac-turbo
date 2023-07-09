@@ -6,3 +6,22 @@
 <p>Status: <%= @game.status %></p>
 <p>Created: <%= @game.created_at %></p>
 <p>Updated: <%= @game.updated_at %></p>
+
+<table>
+  <% @game.board.rows_with_index.each do |row| %>
+    <tr>
+      <% row.each do |value, index| %>
+        <td>
+          <% if value %>
+            <%= value %>
+          <% else %>
+            <%= form_with model: [@game, @game.moves.new(player: current_player, index:)] do |f| %>
+              <%= f.hidden_field :index %>
+              <%= f.submit ' ', disabled: current_player != @game.turn_player %>
+            <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
