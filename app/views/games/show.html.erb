@@ -1,0 +1,8 @@
+<h1>Game #<%= @game.id %></h1>
+
+<p>Game #<%= @game.id %></p>
+<p>Player X: <%= @game.player_x&.name || 'waiting...' %></p>
+<p>Player O: <%= @game.player_o&.name || 'waiting...' %></p>
+<p>Status: <%= @game.status %></p>
+<p>Created: <%= @game.created_at %></p>
+<p>Updated: <%= @game.updated_at %></p>

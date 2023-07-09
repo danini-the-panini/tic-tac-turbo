@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+waiting_one:
+  player_x: one
+  player_o: null
+  status: waiting
+
+waiting_two:
+  player_x: null
+  player_o: two
+  status: waiting
+
+in_progress:
+  player_x: one
+  player_o: two
+  status: x_turn
