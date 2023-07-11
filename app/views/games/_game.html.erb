@@ -1,7 +1,7 @@
-<li class="game-item <%= game.status %>">
+<li class="game-item <%= game.status %>" id="<%= dom_id(game) %>">
   <%= link_to game, class: 'game-link' do %>
     <div class="players">
-      <%= render 'players', game: %>
+      <%= render 'games/players', game:, current_player: %>
     </div>
     <div class="status"><%= game.status_message(current_player) %></div>
     <% if !game.joinable_by?(current_player) && game.c %>

@@ -43,6 +43,11 @@ class Game < ApplicationRecord
     nil
   end
 
+  def other_player(current_player)
+    return player_x if current_player.id == player_o_id
+    return player_o if current_player.id == player_x_id
+  end
+
   def player_value(player)
     return :x if player.id == player_x_id
     return :o if player.id == player_o_id
@@ -52,7 +57,7 @@ class Game < ApplicationRecord
     return x_wins! if board.winner?(:x)
     return o_wins! if board.winner?(:o)
     return draw!   if board.draw?
-    
+
     return x_turn! if o_turn?
     return o_turn! if x_turn?
   end
@@ -100,6 +105,20 @@ class Game < ApplicationRecord
     return :x if x_turn? || x_wins?
     return :o if o_turn? || o_wins?
     :none
+  end
+
+  def broadcast_update_to_other_player(current_player)
+    player = other_player(current_player)
+    broadcast_replace_later_to([self, player],
+      target:  self,
+      partial: 'games/frame',
+      locals:  { game: self, current_player: player }
+    )
+    broadcast_replace_later_to([player, :games],
+      target:  self,
+      partial: 'games/game',
+      locals:  { game: self, current_player: player }
+    )
   end
 
 end

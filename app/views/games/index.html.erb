@@ -1,3 +1,5 @@
+<%= turbo_stream_from [current_player, :games] %>
+
 <main class="games">
   <%= button_to 'New Game', Game.new, class: 'new-game' %>
 

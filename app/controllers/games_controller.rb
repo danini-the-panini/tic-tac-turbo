@@ -39,6 +39,7 @@ class GamesController < ApplicationController
     @game.status = :x_turn
 
     if @game.save
+      @game.broadcast_update_to_other_player(current_player)
       redirect_to @game, notice: 'Joined game!'
     else
       redirect_to games_path, alert: @game.errors.full_messages.to_sentence
