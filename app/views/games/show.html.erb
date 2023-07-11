@@ -1,38 +1,40 @@
-<main class="game <%= @game.status %>">
-  <div class="players-panel">
-    <div class="players">
-      <%= render 'players', game: @game %>
+<%= turbo_frame_tag @game do %>
+  <main class="game <%= @game.status %>">
+    <div class="players-panel">
+      <div class="players">
+        <%= render 'players', game: @game %>
+      </div>
+
+      <% if @game.joinable_by?(current_player) %>
+        <%= button_to 'Join!', join_game_path(@game), class: "join-button" %>
+      <% end %>
     </div>
 
-    <% if @game.joinable_by?(current_player) %>
-      <%= button_to 'Join!', join_game_path(@game), class: "join-button" %>
-    <% end %>
-  </div>
+    <h2><%= @game.status_message(current_player) %></h2>
 
-  <h2><%= @game.status_message(current_player) %></h2>
-
-  <div class="board">
-    <% @game.board.rows_with_index.each do |row| %>
-      <% row.each do |value, index| %>
-        <% if value %>
-          <div class="value <%= value %>"><%= image_tag "#{value}.svg" %></div>
-        <% elsif @game.ended? %>
-          <div></div>
-        <% else %>
-          <%= form_with model: [@game, Move.new(index:)] do |f| %>
-            <%= f.hidden_field :index %>
-            <%= f.button '', disabled: current_player != @game.turn_player, class: @game.player_value(current_player) %>
+    <div class="board">
+      <% @game.board.rows_with_index.each do |row| %>
+        <% row.each do |value, index| %>
+          <% if value %>
+            <div class="value <%= value %>"><%= image_tag "#{value}.svg" %></div>
+          <% elsif @game.ended? %>
+            <div></div>
+          <% else %>
+            <%= form_with model: [@game, Move.new(index:)] do |f| %>
+              <%= f.hidden_field :index %>
+              <%= f.button '', disabled: current_player != @game.turn_player, class: @game.player_value(current_player) %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
-  <% unless @game.waiting? || @game.moves.none? %>
-    <%= link_to [@game, :moves] do %>
-      <ul class="moves">
-        <%= render @game.moves.order(created_at: :asc).last %>
-      </ul>
+    <% unless @game.waiting? || @game.moves.none? %>
+      <%= link_to [@game, :moves] do %>
+        <ul class="moves">
+          <%= render @game.moves.order(created_at: :asc).last %>
+        </ul>
+      <% end %>
     <% end %>
-  <% end %>
-</main>
+  </main>
+<% end %>
