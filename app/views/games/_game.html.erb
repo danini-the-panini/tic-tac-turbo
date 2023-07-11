@@ -3,7 +3,10 @@
     <div class="players">
       <%= render 'players', game: %>
     </div>
-    <div class="status"><%= game.status %></div>
+    <div class="status"><%= game.status_message(current_player) %></div>
+    <% if !game.joinable_by?(current_player) && game.c %>
+      <%= image_tag "#{game.c}.svg", class: 'c' %>
+    <% end %>
   <% end %>
   <% if game.joinable_by?(current_player) %>
     <%= button_to 'Join', join_game_path(game), class: 'join-button' %>

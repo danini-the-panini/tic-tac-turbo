@@ -1,4 +1,6 @@
 <main class="games">
+  <%= button_to 'New Game', Game.new, class: 'new-game' %>
+
   <h2>Your games</h2>
   <ul class="game-list">
     <%= render @yours %>
@@ -7,7 +9,6 @@
   <h2>Waiting for players</h2>
   <ul class="game-list">
     <%= render @joinable %>
-    <li class="new-game"><%= button_to 'New Game', Game.new %></li>
   </ul>
 
   <h2>Other games</h2>

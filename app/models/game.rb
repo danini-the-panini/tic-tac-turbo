@@ -68,4 +68,31 @@ class Game < ApplicationRecord
     @board ||= Board.new(self)
   end
 
+  def status_message(player)
+    case status
+    when 'waiting'          then 'Waiting...'
+    when 'x_turn', 'o_turn' then turn_message(player)
+    when 'x_wins', 'o_wins' then win_message(player)
+    when 'draw'             then 'Draw!'
+    end
+  end
+
+  def turn_message(player)
+    return 'Your turn' if player == turn_player
+
+    "#{turn_player.name}'s turn"
+  end
+
+  def win_message(player)
+    return 'You won!' if player == turn_player
+
+    "#{turn_player.name} won!"
+  end
+
+  def c
+    return :x if x_turn? || x_wins?
+    return :o if o_turn? || o_wins?
+    :none
+  end
+
 end

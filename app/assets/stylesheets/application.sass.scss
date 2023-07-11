@@ -110,6 +110,12 @@ img {
   display: block;
 }
 
+main {
+  width: 32rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 @import "./new-player.scss";
 @import "./layout.scss";
 @import "./games.scss";

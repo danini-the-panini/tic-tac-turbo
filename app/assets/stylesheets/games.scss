@@ -1,6 +1,12 @@
 main.games {
   padding: $space-default;
 
+  button.new-game {
+    @include bordered;
+    width: 100%;
+    border-radius: $border-radius - $border-width;
+  }
+
   ul {
     @include bordered($radius: $border-radius-big);
     min-height: 4rem;
@@ -20,7 +26,7 @@ main.games {
 
       .game-link {
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 1fr auto;
         justify-items: center;
         align-items: center;
         border-top-left-radius: $border-radius - $border-width;
@@ -35,6 +41,15 @@ main.games {
           border-top-right-radius: $border-radius - $border-width;
           border-bottom-right-radius: $border-radius - $border-width;
         }
+
+        .status {
+          font-weight: bold;
+        }
+
+        img.c {
+          height: 100%;
+          width: auto;
+        }
       }
 
       .players {
@@ -47,13 +62,6 @@ main.games {
         border-left: $border-width solid $border-color;
         border-top-right-radius: $border-radius - $border-width;
         border-bottom-right-radius: $border-radius - $border-width;
-      }
-
-      &.new-game {
-        button {
-          width: 100%;
-          border-radius: $border-radius - $border-width;
-        }
       }
     }
 

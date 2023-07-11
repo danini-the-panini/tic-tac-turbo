@@ -9,7 +9,7 @@
     <% end %>
   </div>
 
-  <h2><%= @game.status%></h2>
+  <h2><%= @game.status_message(current_player) %></h2>
 
   <div class="board">
     <% @game.board.rows_with_index.each do |row| %>
