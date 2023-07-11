@@ -51,6 +51,7 @@ main.games {
 
         .status {
           font-weight: bold;
+          text-align: center;
         }
 
         img.c {
@@ -61,8 +62,12 @@ main.games {
       }
 
       &.waiting {
+        .game-link {
+          grid-template-columns: 1fr 1fr;
+        }
+
         .status {
-          visibility: hidden;
+          display: none;
         }
       }
 

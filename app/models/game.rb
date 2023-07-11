@@ -93,7 +93,7 @@ class Game < ApplicationRecord
     return '...' unless player
 
     name = player.name
-    return "#{name} (you)" if player == current_player
+    return "#{name} 👤" if player == current_player
 
     name
   end
