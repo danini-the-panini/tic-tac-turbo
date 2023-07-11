@@ -1,5 +1,5 @@
 <li class="game-item <%= game.status %>">
-  <%= link_to game, class: 'game-link' do %>
+  <%= link_to game, class: 'game-link', data: { turbo_frame: '_top' } do %>
     <div class="players">
       <%= render 'players', game: %>
     </div>
