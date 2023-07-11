@@ -1,0 +1,5 @@
+<%= turbo_frame_tag filter, src: games_path(filter:), loading: :lazy, target: '_top' do %>
+  <ul class="game-list">
+    <%= render 'skeleton' %>
+  </ul>
+<% end %>

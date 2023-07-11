@@ -2,30 +2,14 @@
   <%= button_to 'New Game', Game.new, class: 'new-game' %>
 
   <h2>Your games</h2>
-  <%= turbo_frame_tag :yours, src: games_path(filter: :yours), loading: :lazy do %>
-    <ul class="game-list">
-      <%= render 'skeleton' %>
-    </ul>
-  <% end %>
+  <%= render 'list', filter: :yours %>
 
   <h2>Waiting for players</h2>
-  <%= turbo_frame_tag :joinable, src: games_path(filter: :joinable), loading: :lazy do %>
-    <ul class="game-list">
-      <%= render 'skeleton' %>
-    </ul>
-  <% end %>
+  <%= render 'list', filter: :joinable %>
 
   <h2>Other games</h2>
-  <%= turbo_frame_tag :other, src: games_path(filter: :other), loading: :lazy do %>
-    <ul class="game-list">
-      <%= render 'skeleton' %>
-    </ul>
-  <% end %>
+  <%= render 'list', filter: :other %>
 
   <h2>Ended</h2>
-  <%= turbo_frame_tag :ended, src: games_path(filter: :ended), loading: :lazy do %>
-    <ul class="game-list">
-      <%= render 'skeleton' %>
-    </ul>
-  <% end %>
+  <%= render 'list', filter: :ended %>
 </main>
