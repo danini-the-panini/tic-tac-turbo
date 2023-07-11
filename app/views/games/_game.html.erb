@@ -1,4 +1,4 @@
-<li class="game-item">
+<li class="game-item <%= game.status %>">
   <%= link_to game, class: 'game-link' do %>
     <div class="players">
       <%= render 'players', game: %>

@@ -70,7 +70,7 @@ class Game < ApplicationRecord
 
   def status_message(player)
     case status
-    when 'waiting'          then 'Waiting...'
+    when 'waiting'          then 'Waiting for players...'
     when 'x_turn', 'o_turn' then turn_message(player)
     when 'x_wins', 'o_wins' then win_message(player)
     when 'draw'             then 'Draw!'
