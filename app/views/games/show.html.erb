@@ -19,7 +19,7 @@
         <% elsif @game.ended? %>
           <div></div>
         <% else %>
-          <%= form_with model: [@game, @game.moves.new(player: current_player, index:)] do |f| %>
+          <%= form_with model: [@game, Move.new(index:)] do |f| %>
             <%= f.hidden_field :index %>
             <%= f.button '', disabled: current_player != @game.turn_player, class: @game.player_value(current_player) %>
           <% end %>
@@ -28,11 +28,11 @@
     <% end %>
   </div>
 
-  <% unless @game.waiting? %>
-    <ul class="moves">
-      <% @game.moves.order(created_at: :asc).each do |move| %>
-        <li><%= image_tag "#{move.value}.svg" %> <%= move.position %></li>
-      <% end %>
-    </ul>
+  <% unless @game.waiting? || @game.moves.none? %>
+    <%= link_to [@game, :moves] do %>
+      <ul class="moves">
+        <%= render @game.moves.order(created_at: :asc).last %>
+      </ul>
+    <% end %>
   <% end %>
 </main>

@@ -83,20 +83,6 @@ main.game {
     }
   }
 
-  .moves {
-    @include bordered;
-    margin-top: $space-big;
-    padding: $space-big;
-    display: flex;
-    flex-direction: column;
-    gap: $space-default;
-
-    li {
-      display: flex;
-      gap: $space-default;
-    }
-  }
-
   &.draw .x, &.draw .o, &.x_wins .o, &.o_wins .x {
     filter: blur(4px);
   }

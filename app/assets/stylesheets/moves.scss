@@ -1,0 +1,24 @@
+.moves {
+  @include bordered;
+  background-color: $background-color;
+  margin-top: $space-big;
+  padding: $space-big;
+  display: flex;
+  flex-direction: column;
+  gap: $space-default;
+
+  li {
+    display: flex;
+    gap: $space-default;
+  }
+}
+
+a:hover .moves {
+  background-color: $hilight-color;
+}
+
+.modal .moves {
+  width: 32rem;
+  max-width: 100%;
+  margin: 0 auto;
+}

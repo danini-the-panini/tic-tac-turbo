@@ -12,6 +12,10 @@ class MovesController < ApplicationController
     end
   end
 
+  def index
+    @moves = game.moves.order(created_at: :asc)
+  end
+
   private
 
     def game
