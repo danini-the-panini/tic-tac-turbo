@@ -1,6 +1,8 @@
-<section class="modal">
-  <%= link_to '', :back, class: 'back' %>
-  <ul class="moves">
-    <%= render @moves.order(created_at: :asc) %>
-  </ul>
-</section>
+<%= turbo_frame_tag :moves do %>
+  <section class="modal">
+    <%= link_to '', :back, class: 'back' %>
+    <ul class="moves">
+      <%= render @moves.order(created_at: :asc) %>
+    </ul>
+  </section>
+<% end %>

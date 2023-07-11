@@ -30,10 +30,12 @@
     </div>
 
     <% unless @game.waiting? || @game.moves.none? %>
-      <%= link_to [@game, :moves] do %>
-        <ul class="moves">
-          <%= render @game.moves.order(created_at: :asc).last %>
-        </ul>
+      <%= turbo_frame_tag :moves do %>
+        <%= link_to [@game, :moves] do %>
+          <ul class="moves">
+            <%= render @game.moves.order(created_at: :asc).last %>
+          </ul>
+        <% end %>
       <% end %>
     <% end %>
   </main>
