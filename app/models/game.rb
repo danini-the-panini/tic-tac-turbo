@@ -30,8 +30,8 @@ class Game < ApplicationRecord
   }
 
   def turn_player
-    return player_x if x_turn?
-    return player_o if o_turn?
+    return player_x if x_turn? || x_wins?
+    return player_o if o_turn? || o_wins?
 
     nil
   end
@@ -77,16 +77,33 @@ class Game < ApplicationRecord
     end
   end
 
-  def turn_message(player)
-    return 'Your turn' if player == turn_player
+  def turn_message(current_player)
+    return 'Your turn' if current_player == turn_player
 
     "#{turn_player.name}'s turn"
   end
 
-  def win_message(player)
-    return 'You won!' if player == turn_player
+  def win_message(current_player)
+    return 'You won!' if current_player == turn_player
 
     "#{turn_player.name} won!"
+  end
+
+  def player_name(player, current_player = nil)
+    return '...' unless player
+
+    name = player.name
+    return "#{name} (you)" if player == current_player
+
+    name
+  end
+
+  def player_x_name(current_player = nil)
+    player_name(player_x, current_player)
+  end
+
+  def player_o_name(current_player = nil)
+    player_name(player_o, current_player)
   end
 
   def c

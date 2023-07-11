@@ -1,2 +1,2 @@
-<div class="player <%= class_names(you: game.player_x == current_player, turn: game.x_turn?) %>"><%= image_tag 'x.svg' %><%= game.player_x&.name || '...' %></div>
-<div class="player <%= class_names(you: game.player_o == current_player, turn: game.o_turn?) %>"><%= image_tag 'o.svg' %><%= game.player_o&.name || '...' %></div>
+<div class="<%= class_names(player: true, turn: game.x_turn?) %>"><%= image_tag 'x.svg' %><%= game.player_x_name(current_player) %></div>
+<div class="<%= class_names(player: true, turn: game.o_turn?) %>"><%= image_tag 'o.svg' %><%= game.player_o_name(current_player) %></div>

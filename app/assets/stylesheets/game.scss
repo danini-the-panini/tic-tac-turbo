@@ -93,12 +93,8 @@ main.game {
   align-items: center;
   gap: $space-default;
 
-  &.you {
-    font-weight: 700;
-  }
-
   &.turn {
-    text-decoration: underline;
+    font-weight: 700;
   }
 
   img {
