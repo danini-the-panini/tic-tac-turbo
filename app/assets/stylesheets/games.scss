@@ -65,7 +65,7 @@ main.games {
       }
     }
 
-    &:not(:has(*))::before {
+    li.no-games {
       @include bordered($style: dashed);
       content: 'No games';
       font-style: italic;
@@ -74,5 +74,27 @@ main.games {
       padding: $space-big;
       color: $border-color;
     }
+
+    li.skeleton {
+      border: none;
+      height: 4rem;
+      background:
+        linear-gradient(to right, transparent, transparent, $hilight-text-color, transparent, transparent),
+        linear-gradient($border-color, $border-color);
+      cursor: progress;
+      background-repeat: no-repeat;
+      background-size: 32rem 4rem, 32rem 4rem;
+      background-position: -32rem 0, 0 0;
+      animation: skeleton 1.5s infinite;
+    }
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -32rem 0, 0 0;
+  }
+  100% {
+    background-position: 32rem 0, 0 0;
   }
 }

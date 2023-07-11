@@ -3,21 +3,21 @@
 
   <h2>Your games</h2>
   <ul class="game-list">
-    <%= render @yours %>
+    <%= render 'games', games: @yours %>
   </ul>
 
   <h2>Waiting for players</h2>
   <ul class="game-list">
-    <%= render @joinable %>
+    <%= render 'games', games: @joinable %>
   </ul>
 
   <h2>Other games</h2>
   <ul class="game-list">
-    <%= render @other %>
+    <%= render 'games', games: @other %>
   </ul>
 
   <h2>Ended</h2>
   <ul class="game-list">
-    <%= render @ended %>
+    <%= render 'games', games: @ended %>
   </ul>
 </main>
