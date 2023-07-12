@@ -50,7 +50,12 @@ class Game < ApplicationRecord
     return player_o if current_player.id == player_x_id
   end
 
+  def player?(player)
+    player.id == player_x_id || player.id == player_o_id
+  end
+
   def player_value(player)
+    return unless player
     return :x if player.id == player_x_id
     return :o if player.id == player_o_id
   end
@@ -93,13 +98,13 @@ class Game < ApplicationRecord
   end
 
   def turn_message(current_player)
-    return 'Your turn' if current_player.id == turn_player_id
+    return 'Your turn' if current_player&.id == turn_player_id
 
     "#{turn_player.name}'s turn"
   end
 
   def win_message(current_player)
-    return 'You won!' if current_player.id == turn_player_id
+    return 'You won!' if current_player&.id == turn_player_id
 
     "#{turn_player.name} won!"
   end
@@ -121,6 +126,11 @@ class Game < ApplicationRecord
       target:  dom_id(self, :yours),
       partial: 'games/game',
       locals:  { game: self, current_player: player, prefix: :yours }
+    )
+    broadcast_replace_later_to(self,
+      target:  self,
+      partial: 'games/frame',
+      locals:  { game: self, current_player: nil }
     )
   end
 
