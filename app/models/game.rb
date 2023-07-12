@@ -64,6 +64,7 @@ class Game < ApplicationRecord
 
   def joinable_by?(player)
     return false unless waiting?
+    return true unless player
 
     player_x_id != player.id && player_o_id != player.id
   end
@@ -118,6 +119,14 @@ class Game < ApplicationRecord
       target:  self,
       partial: 'games/game',
       locals:  { game: self, current_player: player }
+    )
+  end
+
+  def broadcast_create
+    broadcast_append_later_to(:games,
+      target:  :joinable_list,
+      partial: 'games/game',
+      locals:  { game: self, current_player: nil }
     )
   end
 

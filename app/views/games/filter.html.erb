@@ -1,5 +1,5 @@
 <%= turbo_frame_tag params[:filter] do %>
-  <ul class="game-list">
+  <ul class="game-list" id="<%= params[:filter] %>_list">
     <%= render @games %>
   </ul>
 <% end %>

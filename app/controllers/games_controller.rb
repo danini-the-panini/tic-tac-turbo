@@ -21,6 +21,7 @@ class GamesController < ApplicationController
     )
 
     if @game.save
+      @game.broadcast_create
       redirect_to @game, notice: 'Game created!'
     else
       redirect_to games_path, alert: @game.errors.full_messages.to_sentence
