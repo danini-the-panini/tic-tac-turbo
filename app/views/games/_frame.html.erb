@@ -6,7 +6,7 @@
       </div>
 
       <% if game.joinable_by?(current_player) %>
-        <%= button_to 'Join!', join_game_path(game), class: "join-button" %>
+        <%= button_to 'Join!', join_game_path(game), class: "join-button", data: { turbo_frame: '_top' } %>
       <% end %>
     </div>
 
