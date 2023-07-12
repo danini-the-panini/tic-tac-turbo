@@ -141,6 +141,41 @@ section.modal {
   }
 }
 
+.flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: $space-big;
+  text-align: center;
+  color: $hilight-text-color;
+  font-weight: bold;
+  animation-name: flash;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  transform: translateY(-100%);
+
+  &.notice {
+    background-color: $o-color;
+  }
+
+  &.alert {
+    background-color: $x-color;
+  }
+}
+
+@keyframes flash {
+  20% {
+    transform: translateY(0%);
+  }
+  80% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
 @import "./new-player.scss";
 @import "./layout.scss";
 @import "./games.scss";
