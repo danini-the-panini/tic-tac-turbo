@@ -36,9 +36,16 @@ class Game < ApplicationRecord
     nil
   end
 
+  def turn_player_id
+    return player_x_id if x_turn? || x_wins?
+    return player_o_id if o_turn? || o_wins?
+
+    nil
+  end
+
   def player_value(player)
-    return :x if player == player_x
-    return :o if player == player_o
+    return :x if player.id == player_x_id
+    return :o if player.id == player_o_id
   end
 
   def end_turn!
@@ -53,7 +60,7 @@ class Game < ApplicationRecord
   def joinable_by?(player)
     return false unless waiting?
 
-    player_x != player && player_o != player
+    player_x_id != player.id && player_o_id != player.id
   end
 
   def in_progress?
@@ -78,13 +85,13 @@ class Game < ApplicationRecord
   end
 
   def turn_message(current_player)
-    return 'Your turn' if current_player == turn_player
+    return 'Your turn' if current_player.id == turn_player_id
 
     "#{turn_player.name}'s turn"
   end
 
   def win_message(current_player)
-    return 'You won!' if current_player == turn_player
+    return 'You won!' if current_player.id == turn_player_id
 
     "#{turn_player.name} won!"
   end

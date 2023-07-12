@@ -44,9 +44,9 @@ class Move < ApplicationRecord
   private
 
     def player_in_game
-      return unless player
-      return if player == game.player_x
-      return if player == game.player_o
+      return unless player_id
+      return if player_id == game.player_x_id
+      return if player_id == game.player_o_id
 
       errors.add(:player, 'is not playing')
     end
@@ -59,8 +59,8 @@ class Move < ApplicationRecord
     end
 
     def player_turn
-      return unless game && player
-      return if player == game.turn_player
+      return unless game && player_id
+      return if player_id == game.turn_player_id
 
       errors.add(:player, 'must wait their turn')
     end
