@@ -130,4 +130,8 @@ class Game < ApplicationRecord
     )
   end
 
+  def broadcast_join
+    broadcast_remove_to(:games, target: self)
+  end
+
 end

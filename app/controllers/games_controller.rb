@@ -41,6 +41,7 @@ class GamesController < ApplicationController
 
     if @game.save
       @game.broadcast_update_to_other_player(current_player)
+      @game.broadcast_join
       redirect_to @game, notice: 'Joined game!'
     else
       redirect_to games_path, alert: @game.errors.full_messages.to_sentence
