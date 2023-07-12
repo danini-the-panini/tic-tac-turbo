@@ -8,6 +8,7 @@ $x-color: #E55C31;
 $o-color: #1BA048;
 
 $border-width: 0.25rem; // 4px
+$border-radius-small: 0.5rem; // 8px
 $border-radius: 1rem; // 16px
 $border-radius-big: 1.5rem; // 24px
 
@@ -141,19 +142,22 @@ section.modal {
   }
 }
 
+$flash-height: 3rem;
 .flash {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: -$flash-height;
+  left: 50%;
   padding: $space-big;
+  height: $flash-height;
   text-align: center;
   color: $hilight-text-color;
   font-weight: bold;
   animation-name: flash;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
-  transform: translateY(-100%);
+  transform: translateX(-50%);
+  border-bottom-left-radius: $border-radius-small;
+  border-bottom-right-radius: $border-radius-small;
 
   &.notice {
     background-color: $o-color;
@@ -165,14 +169,14 @@ section.modal {
 }
 
 @keyframes flash {
-  20% {
-    transform: translateY(0%);
+  10% {
+    top: 0;
   }
-  80% {
-    transform: translateY(0%);
+  90% {
+    top: 0;
   }
   100% {
-    transform: translateY(-100%);
+    top: -$flash-height;
   }
 }
 
