@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  include ActionView::RecordIdentifier
+
   belongs_to :player_x, class_name: 'Player', optional: true
   belongs_to :player_o, class_name: 'Player', optional: true
 
@@ -116,9 +118,9 @@ class Game < ApplicationRecord
       locals:  { game: self, current_player: player }
     )
     broadcast_replace_later_to([player, :games],
-      target:  self,
+      target:  dom_id(self, :yours),
       partial: 'games/game',
-      locals:  { game: self, current_player: player }
+      locals:  { game: self, current_player: player, prefix: :yours }
     )
   end
 
@@ -126,12 +128,12 @@ class Game < ApplicationRecord
     broadcast_append_later_to(:games,
       target:  :joinable_list,
       partial: 'games/game',
-      locals:  { game: self, current_player: nil }
+      locals:  { game: self, current_player: nil, prefix: :joinable }
     )
   end
 
   def broadcast_join
-    broadcast_remove_to(:games, target: self)
+    broadcast_remove_to(:games, target: dom_id(self, :joinable))
   end
 
 end

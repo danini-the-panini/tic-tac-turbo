@@ -1,4 +1,4 @@
-<li class="game-item <%= game.status %>" id="<%= dom_id(game) %>">
+<li class="game-item <%= game.status %>" id="<%= dom_id(game, prefix) %>">
   <%= link_to game, class: 'game-link' do %>
     <div class="players">
       <%= render 'games/players', game:, current_player: %>
