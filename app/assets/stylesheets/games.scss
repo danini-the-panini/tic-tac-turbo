@@ -78,16 +78,6 @@ main.games {
       }
     }
 
-    li.no-games {
-      @include bordered($style: dashed);
-      content: 'No games';
-      font-style: italic;
-      font-weight: 900;
-      text-align: center;
-      padding: $space-big;
-      color: $border-color;
-    }
-
     li.skeleton {
       border: none;
       height: 4rem;
@@ -99,6 +89,16 @@ main.games {
       background-size: 32rem 4rem, 32rem 4rem;
       background-position: -32rem 0, 0 0;
       animation: skeleton 1.5s infinite;
+    }
+
+    &:not(:has(li))::before {
+      @include bordered($style: dashed);
+      content: 'No games';
+      font-style: italic;
+      font-weight: 900;
+      text-align: center;
+      padding: $space-big;
+      color: $border-color;
     }
   }
 }
