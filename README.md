@@ -1,24 +1,14 @@
-# README
+# Tic-Tac-Turbo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an example of turbo-ifying an existing Rails app.
 
-Things you may want to cover:
+See the `turbocharge` branch and step through the commits to see how I did it.
 
-* Ruby version
+Feel free to experiment!
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run:
+```
+git clone git@github.com:danini-the-panini/tic-tac-turbo
+bin/setup
+bin/dev
+```
