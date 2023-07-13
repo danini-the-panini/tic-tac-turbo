@@ -22,3 +22,7 @@ a:hover .moves {
   max-width: 100%;
   margin: 0 auto;
 }
+
+#moves:has(*) + a[data-turbo-frame="moves"] {
+  visibility: hidden;
+}

@@ -1,23 +1,18 @@
+<%= turbo_stream_from [current_player, :games] %>
+<%= turbo_stream_from :games %>
+
 <main class="games">
   <%= button_to 'New Game', Game.new, class: 'new-game' %>
 
-  <h2>Your games</h2>
-  <ul class="game-list">
-    <%= render @yours %>
-  </ul>
+  <h2>Your games <button onclick="yours.reload()">🔃</button></h2>
+  <%= render 'list', filter: :yours %>
 
-  <h2>Waiting for players</h2>
-  <ul class="game-list">
-    <%= render @joinable %>
-  </ul>
+  <h2>Waiting for players <button onclick="joinable.reload()">🔃</button></h2>
+  <%= render 'list', filter: :joinable %>
 
-  <h2>Other games</h2>
-  <ul class="game-list">
-    <%= render @other %>
-  </ul>
+  <h2>Other games <button onclick="other.reload()">🔃</button></h2>
+  <%= render 'list', filter: :other %>
 
-  <h2>Ended</h2>
-  <ul class="game-list">
-    <%= render @ended %>
-  </ul>
+  <h2>Ended <button onclick="ended.reload()">🔃</button></h2>
+  <%= render 'list', filter: :ended %>
 </main>
